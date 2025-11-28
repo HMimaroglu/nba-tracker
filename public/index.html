@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBA Live Scores</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+
+    .logo svg {
+      width: 50px;
+      height: 50px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ffcc00 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+    }
+
+    .date-display {
+      font-size: 1.1rem;
+      color: #888;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .live-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(34, 197, 94, 0.1);
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .game-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+      border-radius: 20px;
+      padding: 25px;
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ff6b35, #f7931e, #ffcc00);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.2);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .game-card:hover::before {
+      opacity: 1;
+    }
+
+    .game-card.live {
+      border-color: rgba(34, 197, 94, 0.4);
+    }
+
+    .game-card.live::before {
+      background: #22c55e;
+      opacity: 1;
+    }
+
+    .game-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .status-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-badge.live {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+      animation: pulse-bg 2s infinite;
+    }
+
+    @keyframes pulse-bg {
+      0%, 100% { background: rgba(34, 197, 94, 0.2); }
+      50% { background: rgba(34, 197, 94, 0.3); }
+    }
+
+    .status-badge.final {
+      background: rgba(148, 163, 184, 0.2);
+      color: #94a3b8;
+    }
+
+    .status-badge.scheduled {
+      background: rgba(59, 130, 246, 0.2);
+      color: #3b82f6;
+    }
+
+    .game-time {
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    .teams {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .team {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      transition: background 0.2s ease;
+    }
+
+    .team:hover {
+      background: rgba(255,255,255,0.06);
+    }
+
+    .team.winner {
+      background: rgba(34, 197, 94, 0.1);
+    }
+
+    .team-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .team-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .team-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .team-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .team-name {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .team-record {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    .team-score {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      min-width: 60px;
+      text-align: right;
+    }
+
+    .team.winner .team-score {
+      color: #22c55e;
+    }
+
+    .game-details {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .arena-info {
+      font-size: 0.8rem;
+      color: #666;
+      text-align: center;
+    }
+
+    .prediction {
+      margin-top: 15px;
+      padding: 15px;
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(247, 147, 30, 0.1) 100%);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 107, 53, 0.2);
+    }
+
+    .prediction-header {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #f7931e;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .prediction-scores {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .predicted-team {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .predicted-team-name {
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    .predicted-score {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #f7931e;
+    }
+
+    .prediction-vs {
+      font-size: 0.8rem;
+      color: #555;
+    }
+
+    .no-games {
+      text-align: center;
+      padding: 80px 20px;
+      color: #666;
+    }
+
+    .no-games-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+
+    .no-games h2 {
+      font-size: 1.5rem;
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 20px;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255,255,255,0.1);
+      border-top-color: #ff6b35;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      margin-top: 20px;
+      color: #666;
+    }
+
+    .error {
+      text-align: center;
+      padding: 80px 20px;
+      color: #ef4444;
+    }
+
+    .error-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    .error h2 {
+      color: #ef4444;
+      margin-bottom: 10px;
+    }
+
+    .error p {
+      color: #888;
+      margin-bottom: 10px;
+    }
+
+    .error code {
+      display: block;
+      background: rgba(255,255,255,0.05);
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      color: #22c55e;
+      margin: 20px auto;
+      max-width: 500px;
+      text-align: left;
+    }
+
+    .error a {
+      color: #3b82f6;
+      text-decoration: none;
+    }
+
+    .error a:hover {
+      text-decoration: underline;
+    }
+
+    .refresh-btn {
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.2s ease;
+    }
+
+    .refresh-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .games-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-score {
+        font-size: 1.5rem;
+      }
+
+      .team-logo {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" stroke="url(#gradient)" stroke-width="6" fill="none"/>
+          <path d="M50 5 L50 95" stroke="url(#gradient)" stroke-width="3"/>
+          <path d="M5 50 C5 50 30 30 50 30 C70 30 95 50 95 50" stroke="url(#gradient)" stroke-width="3" fill="none"/>
+          <path d="M5 50 C5 50 30 70 50 70 C70 70 95 50 95 50" stroke="url(#gradient)" stroke-width="3" fill="none"/>
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff6b35"/>
+              <stop offset="50%" stop-color="#f7931e"/>
+              <stop offset="100%" stop-color="#ffcc00"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <h1>NBA Live Scores</h1>
+      </div>
+      <div class="date-display" id="currentDate"></div>
+      <div class="status-bar">
+        <div class="live-indicator">
+          <span class="live-dot"></span>
+          <span>Auto-updating every 30s</span>
+        </div>
+      </div>
+    </header>
+
+    <main id="gamesContainer">
+      <div class="loading">
+        <div class="spinner"></div>
+        <p class="loading-text">Loading today's games...</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Team ID to abbreviation mapping for logos
+    const teamIdToAbbr = {
+      1: 'ATL', 2: 'BOS', 3: 'BKN', 4: 'CHA', 5: 'CHI',
+      6: 'CLE', 7: 'DAL', 8: 'DEN', 9: 'DET', 10: 'GSW',
+      11: 'HOU', 12: 'IND', 13: 'LAC', 14: 'LAL', 15: 'MEM',
+      16: 'MIA', 17: 'MIL', 18: 'MIN', 19: 'NOP', 20: 'NYK',
+      21: 'OKC', 22: 'ORL', 23: 'PHI', 24: 'PHX', 25: 'POR',
+      26: 'SAC', 27: 'SAS', 28: 'TOR', 29: 'UTA', 30: 'WAS'
+    };
+
+    // Team colors for styling
+    const teamColors = {
+      'ATL': '#E03A3E', 'BOS': '#007A33', 'BKN': '#000000', 'CHA': '#1D1160',
+      'CHI': '#CE1141', 'CLE': '#6F263D', 'DAL': '#00538C', 'DEN': '#0E2240',
+      'DET': '#C8102E', 'GSW': '#1D428A', 'HOU': '#CE1141', 'IND': '#002D62',
+      'LAC': '#C8102E', 'LAL': '#552583', 'MEM': '#5D76A9', 'MIA': '#98002E',
+      'MIL': '#00471B', 'MIN': '#0C2340', 'NOP': '#0C2340', 'NYK': '#006BB6',
+      'OKC': '#007AC1', 'ORL': '#0077C0', 'PHI': '#006BB6', 'PHX': '#1D1160',
+      'POR': '#E03A3E', 'SAC': '#5A2D81', 'SAS': '#C4CED4', 'TOR': '#CE1141',
+      'UTA': '#002B5C', 'WAS': '#002B5C'
+    };
+
+    // NBA team IDs (different from balldontlie IDs)
+    const nbaTeamIds = {
+      'ATL': 1610612737, 'BOS': 1610612738, 'BKN': 1610612751, 'CHA': 1610612766,
+      'CHI': 1610612741, 'CLE': 1610612739, 'DAL': 1610612742, 'DEN': 1610612743,
+      'DET': 1610612765, 'GSW': 1610612744, 'HOU': 1610612745, 'IND': 1610612754,
+      'LAC': 1610612746, 'LAL': 1610612747, 'MEM': 1610612763, 'MIA': 1610612748,
+      'MIL': 1610612749, 'MIN': 1610612750, 'NOP': 1610612740, 'NYK': 1610612752,
+      'OKC': 1610612760, 'ORL': 1610612753, 'PHI': 1610612755, 'PHX': 1610612756,
+      'POR': 1610612757, 'SAC': 1610612758, 'SAS': 1610612759, 'TOR': 1610612761,
+      'UTA': 1610612762, 'WAS': 1610612764
+    };
+
+    // Format date
+    function formatDate(date) {
+      return new Intl.DateTimeFormat('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }).format(date);
+    }
+
+    // Format time
+    function formatGameTime(dateString) {
+      const date = new Date(dateString);
+      return new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+        timeZoneName: 'short'
+      }).format(date);
+    }
+
+    // Get game status
+    function getGameStatus(game) {
+      const status = game.status;
+      if (status === 'Final') return { text: 'Final', class: 'final' };
+      if (status.includes('Qtr') || status.includes('Half') || status === 'In Progress') {
+        return { text: status, class: 'live' };
+      }
+      return { text: formatGameTime(game.datetime), class: 'scheduled' };
+    }
+
+    // Calculate minutes played from game status
+    function getMinutesPlayed(game) {
+      const status = game.status;
+      const period = game.period || 0;
+      const time = game.time || '';
+
+      // Each quarter is 12 minutes
+      const minutesPerQuarter = 12;
+
+      // Calculate completed quarters' minutes
+      let completedMinutes = (period - 1) * minutesPerQuarter;
+
+      // Parse remaining time in current quarter (e.g., "5:30" means 5:30 left)
+      if (time && time.includes(':')) {
+        const [mins, secs] = time.split(':').map(Number);
+        const elapsedInQuarter = minutesPerQuarter - mins - (secs / 60);
+        completedMinutes += elapsedInQuarter;
+      } else if (period > 0) {
+        // If no time info, estimate based on period
+        completedMinutes += minutesPerQuarter / 2; // Assume mid-quarter
+      }
+
+      return Math.max(completedMinutes, 1); // At least 1 minute to avoid division issues
+    }
+
+    // Calculate predicted final score
+    function getPredictedScore(currentScore, minutesPlayed) {
+      if (minutesPlayed <= 0) return currentScore;
+      const scorePerMinute = currentScore / minutesPlayed;
+      return Math.round(scorePerMinute * 48);
+    }
+
+    // Get team logo URL from NBA CDN
+    function getTeamLogo(teamAbbr) {
+      const nbaId = nbaTeamIds[teamAbbr];
+      if (nbaId) {
+        return `https://cdn.nba.com/logos/nba/${nbaId}/global/L/logo.svg`;
+      }
+      return null;
+    }
+
+    // Render API key error
+    function renderApiKeyError() {
+      const container = document.getElementById('gamesContainer');
+      container.innerHTML = `
+        <div class="error">
+          <div class="error-icon">🔑</div>
+          <h2>API Key Required</h2>
+          <p>To show live NBA scores, you need a free API key from balldontlie.io</p>
+          <p><a href="https://www.balldontlie.io/" target="_blank">Get your free API key here</a></p>
+          <p style="margin-top: 20px;">Then start the server with:</p>
+          <code>BALLDONTLIE_API_KEY=your_api_key npm start</code>
+          <button class="refresh-btn" onclick="fetchGames()">Try Again</button>
+        </div>
+      `;
+    }
+
+    // Render games
+    function renderGames(data) {
+      const container = document.getElementById('gamesContainer');
+      const games = data.games;
+
+      if (!games || games.length === 0) {
+        container.innerHTML = `
+          <div class="no-games">
+            <div class="no-games-icon">🏀</div>
+            <h2>No games scheduled today</h2>
+            <p>Check back later for upcoming matchups</p>
+          </div>
+        `;
+        return;
+      }
+
+      const gamesHtml = games.map(game => {
+        const status = getGameStatus(game);
+        const homeTeam = game.home_team;
+        const awayTeam = game.visitor_team;
+        const isLive = status.class === 'live';
+        const isFinal = status.class === 'final';
+
+        const homeScore = game.home_team_score || 0;
+        const awayScore = game.visitor_team_score || 0;
+        const homeWinner = isFinal && homeScore > awayScore;
+        const awayWinner = isFinal && awayScore > homeScore;
+
+        const homeAbbr = homeTeam.abbreviation;
+        const awayAbbr = awayTeam.abbreviation;
+
+        // Calculate predictions for live games
+        const minutesPlayed = getMinutesPlayed(game);
+        const predictedAwayScore = getPredictedScore(awayScore, minutesPlayed);
+        const predictedHomeScore = getPredictedScore(homeScore, minutesPlayed);
+
+        return `
+          <div class="game-card ${isLive ? 'live' : ''}">
+            <div class="game-status">
+              <span class="status-badge ${status.class}">${status.text}</span>
+              ${game.time ? `<span class="game-time">${game.time}</span>` : ''}
+            </div>
+
+            <div class="teams">
+              <div class="team ${awayWinner ? 'winner' : ''}">
+                <div class="team-info">
+                  <div class="team-logo" style="background-color: ${teamColors[awayAbbr] || '#333'}20">
+                    <img src="${getTeamLogo(awayAbbr)}" alt="${awayAbbr}" onerror="this.style.display='none'; this.parentElement.innerText='${awayAbbr}'">
+                  </div>
+                  <div class="team-details">
+                    <div class="team-name">${awayTeam.full_name}</div>
+                    <div class="team-record">${awayAbbr}</div>
+                  </div>
+                </div>
+                <div class="team-score">${isFinal || isLive ? awayScore : '-'}</div>
+              </div>
+
+              <div class="team ${homeWinner ? 'winner' : ''}">
+                <div class="team-info">
+                  <div class="team-logo" style="background-color: ${teamColors[homeAbbr] || '#333'}20">
+                    <img src="${getTeamLogo(homeAbbr)}" alt="${homeAbbr}" onerror="this.style.display='none'; this.parentElement.innerText='${homeAbbr}'">
+                  </div>
+                  <div class="team-details">
+                    <div class="team-name">${homeTeam.full_name}</div>
+                    <div class="team-record">${homeAbbr}</div>
+                  </div>
+                </div>
+                <div class="team-score">${isFinal || isLive ? homeScore : '-'}</div>
+              </div>
+            </div>
+
+            <div class="game-details">
+              <div class="arena-info">
+                📍 ${homeTeam.city}
+              </div>
+            </div>
+
+            ${isLive ? `
+              <div class="prediction">
+                <div class="prediction-header">
+                  <span>📊</span> Projected Final Score
+                </div>
+                <div class="prediction-scores">
+                  <div class="predicted-team">
+                    <span class="predicted-team-name">${awayAbbr}</span>
+                    <span class="predicted-score">${predictedAwayScore}</span>
+                  </div>
+                  <span class="prediction-vs">vs</span>
+                  <div class="predicted-team">
+                    <span class="predicted-score">${predictedHomeScore}</span>
+                    <span class="predicted-team-name">${homeAbbr}</span>
+                  </div>
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+
+      container.innerHTML = `<div class="games-grid">${gamesHtml}</div>`;
+    }
+
+    // Fetch games
+    async function fetchGames() {
+      try {
+        const response = await fetch('/api/scores');
+        const data = await response.json();
+
+        if (data.error === 'API key not configured') {
+          renderApiKeyError();
+          return;
+        }
+
+        if (!response.ok) throw new Error('Failed to fetch');
+
+        renderGames(data);
+      } catch (error) {
+        console.error('Error:', error);
+        const container = document.getElementById('gamesContainer');
+        container.innerHTML = `
+          <div class="error">
+            <div class="error-icon">⚠️</div>
+            <h2>Unable to load games</h2>
+            <p>Please check your connection and try again</p>
+            <button class="refresh-btn" onclick="fetchGames()">Try Again</button>
+          </div>
+        `;
+      }
+    }
+
+    // Initialize
+    document.getElementById('currentDate').textContent = formatDate(new Date());
+    fetchGames();
+
+    // Auto-refresh every 30 seconds
+    setInterval(fetchGames, 30000);
+  </script>
+</body>
+</html>
