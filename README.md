@@ -2,7 +2,7 @@
 
 A sleek, real-time NBA scores tracker built with Node.js and Express. Features live score updates, team logos, and projected final scores for games in progress.
 
-![NBA Tracker Preview](https://cdn.nba.com/logos/leagues/logo-nba.svg)
+![NBA Tracker Preview](screenshot.png)
 
 ## Features
 
