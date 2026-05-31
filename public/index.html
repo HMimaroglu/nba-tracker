@@ -385,6 +385,35 @@
       font-weight: 600;
     }
 
+    .prediction-totals {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(232, 93, 4, 0.3);
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .total-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .total-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #888;
+    }
+
+    .total-value {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #f48c06;
+      text-shadow: 0 0 8px rgba(244, 140, 6, 0.3);
+    }
+
     .no-games {
       text-align: center;
       padding: 80px 20px;
@@ -507,6 +536,640 @@
       box-shadow: 0 10px 25px rgba(232, 93, 4, 0.4);
     }
 
+    /* Tab Navigation */
+    .tab-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .tab-btn {
+      background: rgba(0,0,0,0.3);
+      border: 2px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.7);
+      padding: 12px 30px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .tab-btn:hover {
+      border-color: #e85d04;
+      color: #fff;
+    }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, #e85d04 0%, #f48c06 100%);
+      border-color: #e85d04;
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(232, 93, 4, 0.3);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Odds Tab Styles - Grouped by Time */
+    .time-slot-section {
+      background: rgba(0,0,0,0.4);
+      border-radius: 12px;
+      margin-bottom: 15px;
+      border: 2px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+    }
+
+    .time-slot-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .time-slot-header:hover {
+      background: rgba(255,255,255,0.06);
+    }
+
+    .time-slot-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .time-slot-time {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .time-slot-count {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.1);
+      color: #aaa;
+    }
+
+    .time-slot-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .time-slot-quarter {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(232, 93, 4, 0.3);
+      color: #f48c06;
+      font-weight: 600;
+    }
+
+    .time-slot-quarter.live {
+      background: rgba(34, 197, 94, 0.3);
+      color: #22c55e;
+    }
+
+    .time-slot-quarter.scheduled {
+      background: rgba(100, 100, 100, 0.3);
+      color: #888;
+    }
+
+    .time-slot-arrow {
+      font-size: 1.2rem;
+      color: #666;
+      transition: transform 0.2s ease;
+    }
+
+    .time-slot-section.expanded .time-slot-arrow {
+      transform: rotate(180deg);
+    }
+
+    .time-slot-content {
+      display: none;
+      padding: 0 15px 15px 15px;
+    }
+
+    .time-slot-section.expanded .time-slot-content {
+      display: block;
+    }
+
+    .time-slot-games-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Odds Cards - Compact for grouped view */
+    .odds-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 15px;
+      border-left: 3px solid #e85d04;
+    }
+
+    .odds-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .odds-matchup {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .odds-team {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .odds-vs {
+      color: #666;
+      font-size: 0.75rem;
+    }
+
+    .odds-source {
+      font-size: 0.7rem;
+      color: #666;
+      padding: 3px 8px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+    }
+
+    .odds-totals {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .odds-total-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 15px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+    }
+
+    .odds-total-label {
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+
+    .odds-total-line {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #f48c06;
+    }
+
+    .odds-total-price {
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    /* Odds History */
+    .odds-history {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .odds-history-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #f48c06;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .history-quarter {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 10px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+
+    .history-quarter-label {
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .history-odds {
+      display: flex;
+      gap: 15px;
+    }
+
+    .history-odds-item {
+      font-size: 0.8rem;
+    }
+
+    .history-odds-item span {
+      color: #666;
+    }
+
+    .no-odds {
+      text-align: center;
+      padding: 60px 20px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 20px;
+    }
+
+    .no-odds-icon {
+      font-size: 4rem;
+      margin-bottom: 15px;
+    }
+
+    .no-odds h2 {
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .no-odds p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+    }
+
+    /* Parlay Tab Styles */
+    .parlay-settings {
+      background: rgba(0,0,0,0.4);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .settings-title {
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #f48c06;
+      margin-bottom: 15px;
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+
+    .setting-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .setting-group label {
+      font-size: 0.8rem;
+      color: #888;
+      font-weight: 600;
+    }
+
+    .setting-group input,
+    .setting-group select {
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      padding: 12px;
+      color: #fff;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .setting-group input:focus,
+    .setting-group select:focus {
+      outline: none;
+      border-color: #e85d04;
+      background: rgba(255,255,255,0.15);
+    }
+
+    .setting-group input::placeholder {
+      color: #666;
+    }
+
+    .setting-group select option {
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .calculate-btn {
+      background: linear-gradient(135deg, #e85d04 0%, #f48c06 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba(232, 93, 4, 0.3);
+      margin-top: auto;
+    }
+
+    .calculate-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(232, 93, 4, 0.4);
+    }
+
+    .parlay-placeholder {
+      text-align: center;
+      padding: 60px 20px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 16px;
+    }
+
+    .placeholder-icon {
+      font-size: 4rem;
+      margin-bottom: 15px;
+    }
+
+    .parlay-placeholder h3 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .parlay-placeholder p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+    }
+
+    .qualifying-games {
+      background: rgba(0,0,0,0.4);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .qualifying-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .qualifying-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #f48c06;
+    }
+
+    .qualifying-count {
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      background: rgba(232, 93, 4, 0.3);
+      border-radius: 6px;
+      color: #f48c06;
+    }
+
+    .qualifying-game {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-left: 3px solid #e85d04;
+    }
+
+    .qualifying-game:last-child {
+      margin-bottom: 0;
+    }
+
+    .qualifying-game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .qualifying-matchup {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .qualifying-direction {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .qualifying-direction.over {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+    }
+
+    .qualifying-direction.under {
+      background: rgba(248, 113, 113, 0.2);
+      color: #f87171;
+    }
+
+    .qualifying-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      font-size: 0.85rem;
+    }
+
+    .qualifying-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .qualifying-stat-label {
+      color: #666;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+    }
+
+    .qualifying-stat-value {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .qualifying-stat-value.positive {
+      color: #22c55e;
+    }
+
+    .qualifying-stat-value.negative {
+      color: #f87171;
+    }
+
+    .parlay-recommendation {
+      background: linear-gradient(145deg, rgba(30,30,30,0.95) 0%, rgba(20,20,20,0.95) 100%);
+      border-radius: 16px;
+      padding: 20px;
+      border: 2px solid #e85d04;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 20px rgba(232, 93, 4, 0.2);
+    }
+
+    .recommendation-header {
+      text-align: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .recommendation-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #f48c06;
+      margin-bottom: 10px;
+    }
+
+    .recommendation-bet {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #22c55e;
+      text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+    }
+
+    .recommendation-percent {
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 5px;
+    }
+
+    .recommendation-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .recommendation-stat {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .recommendation-stat-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #888;
+      margin-bottom: 5px;
+    }
+
+    .recommendation-stat-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .recommendation-stat-value.highlight {
+      color: #f48c06;
+    }
+
+    .parlay-warnings {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .parlay-warning {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(248, 113, 113, 0.1);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 0.8rem;
+      color: #f87171;
+    }
+
+    .parlay-warning:last-child {
+      margin-bottom: 0;
+    }
+
+    .parlay-warning.caution {
+      background: rgba(250, 204, 21, 0.1);
+      color: #facc15;
+    }
+
+    .no-qualifying {
+      text-align: center;
+      padding: 40px 20px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 16px;
+    }
+
+    .no-qualifying-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .no-qualifying h3 {
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .no-qualifying p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+    }
+
+    .parlay-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 10px;
+      padding: 10px 15px;
+      margin-bottom: 15px;
+      font-size: 0.85rem;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 8px #22c55e;
+    }
+
+    .status-text {
+      color: #22c55e;
+      font-weight: 600;
+    }
+
+    .last-update {
+      color: #888;
+      margin-left: auto;
+      font-size: 0.8rem;
+    }
+
     @media (max-width: 768px) {
       h1 {
         font-size: 1.8rem;
@@ -523,6 +1186,15 @@
       .team-logo {
         width: 40px;
         height: 40px;
+      }
+
+      .odds-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tab-btn {
+        padding: 10px 20px;
+        font-size: 0.8rem;
       }
     }
   </style>
@@ -603,15 +1275,74 @@
       <div class="status-bar">
         <div class="live-indicator">
           <span class="live-dot"></span>
-          <span>Auto-updating every 30s</span>
+          <span>Scores: 3s | Odds: 60s</span>
         </div>
       </div>
+      <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="scores">Scores</button>
+        <button class="tab-btn" data-tab="odds">Live Odds</button>
+        <button class="tab-btn" data-tab="parlay">Parlay</button>
+      </nav>
     </header>
 
-    <main id="gamesContainer">
-      <div class="loading">
-        <div class="spinner"></div>
-        <p class="loading-text">Loading today's games...</p>
+    <main>
+      <div id="scoresTab" class="tab-content active">
+        <div id="gamesContainer">
+          <div class="loading">
+            <div class="spinner"></div>
+            <p class="loading-text">Loading today's games...</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="oddsTab" class="tab-content">
+        <div id="oddsContainer">
+          <div class="loading">
+            <div class="spinner"></div>
+            <p class="loading-text">Loading odds data...</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="parlayTab" class="tab-content">
+        <div id="parlayContainer">
+          <div class="parlay-settings">
+            <h3 class="settings-title">Bankroll Settings</h3>
+            <div class="settings-grid">
+              <div class="setting-group">
+                <label for="bankroll">Bankroll ($)</label>
+                <input type="number" id="bankroll" placeholder="Enter amount" min="1" step="1">
+              </div>
+              <div class="setting-group">
+                <label for="riskLevel">Risk Level</label>
+                <select id="riskLevel">
+                  <option value="conservative">Conservative (1/8 Kelly)</option>
+                  <option value="moderate" selected>Moderate (1/4 Kelly)</option>
+                  <option value="aggressive">Aggressive (1/2 Kelly)</option>
+                </select>
+              </div>
+              <div class="setting-group">
+                <label for="ouWindow">O/U Window</label>
+                <input type="number" id="ouWindow" value="3" min="1" step="0.5">
+              </div>
+              <div class="setting-group">
+                <button class="calculate-btn" onclick="calculateParlay()">Calculate Parlay</button>
+              </div>
+            </div>
+          </div>
+          <div id="parlayStatus" class="parlay-status" style="display: none;">
+            <span class="status-indicator"></span>
+            <span class="status-text">Auto-updating when quarter changes</span>
+            <span class="last-update"></span>
+          </div>
+          <div id="parlayResults">
+            <div class="parlay-placeholder">
+              <div class="placeholder-icon">🎯</div>
+              <h3>Enter your settings above</h3>
+              <p>Click "Calculate Parlay" to find qualifying games based on projected totals vs betting lines</p>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </div>
@@ -681,8 +1412,10 @@
     function getGameStatus(game) {
       const status = game.status;
       if (status === 'Final') return { text: 'Final', class: 'final' };
-      if (status.includes('Qtr') || status.includes('Half') || status === 'In Progress') {
-        return { text: status, class: 'live' };
+      // Check for live game (Q1, Q2, Q3, Q4, OT, Half, etc.)
+      if (/^Q[1-4]$/.test(status) || status.includes('OT') || status.includes('Half') || status === 'In Progress') {
+        const displayStatus = game.time ? `${status} ${game.time}` : status;
+        return { text: displayStatus, class: 'live' };
       }
       return { text: formatGameTime(game.datetime), class: 'scheduled' };
     }
@@ -744,6 +1477,16 @@
       `;
     }
 
+    // Sort games: live first, scheduled next, final last
+    function sortGames(games) {
+      const statusOrder = { 'live': 0, 'scheduled': 1, 'final': 2 };
+      return [...games].sort((a, b) => {
+        const statusA = getGameStatus(a).class;
+        const statusB = getGameStatus(b).class;
+        return statusOrder[statusA] - statusOrder[statusB];
+      });
+    }
+
     // Render games
     function renderGames(data) {
       const container = document.getElementById('gamesContainer');
@@ -760,7 +1503,10 @@
         return;
       }
 
-      const gamesHtml = games.map(game => {
+      // Sort games: live first, then scheduled, then final
+      const sortedGames = sortGames(games);
+
+      const gamesHtml = sortedGames.map(game => {
         const status = getGameStatus(game);
         const homeTeam = game.home_team;
         const awayTeam = game.visitor_team;
@@ -779,6 +1525,13 @@
         const minutesPlayed = getMinutesPlayed(game);
         const predictedAwayScore = getPredictedScore(awayScore, minutesPlayed);
         const predictedHomeScore = getPredictedScore(homeScore, minutesPlayed);
+
+        // Total projections calculated two ways:
+        // Method 1: Sum of individual team projections
+        const totalFromIndividual = predictedAwayScore + predictedHomeScore;
+        // Method 2: Total pace (combined current score / minutes * 48)
+        const currentTotal = awayScore + homeScore;
+        const totalFromPace = Math.round((currentTotal / minutesPlayed) * 48);
 
         return `
           <div class="game-card ${isLive ? 'live' : ''}">
@@ -837,6 +1590,16 @@
                     <span class="predicted-team-name">${homeAbbr}</span>
                   </div>
                 </div>
+                <div class="prediction-totals">
+                  <div class="total-row">
+                    <span class="total-label">Total (sum)</span>
+                    <span class="total-value">${totalFromIndividual}</span>
+                  </div>
+                  <div class="total-row">
+                    <span class="total-label">Total (pace)</span>
+                    <span class="total-value">${totalFromPace}</span>
+                  </div>
+                </div>
               </div>
             ` : ''}
           </div>
@@ -874,12 +1637,790 @@
       }
     }
 
+    // Tab switching
+    let currentTab = 'scores';
+    const tabBtns = document.querySelectorAll('.tab-btn');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+        if (tab === currentTab) return;
+
+        // Update button states
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Update content visibility
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        document.getElementById(`${tab}Tab`).classList.add('active');
+
+        currentTab = tab;
+
+        // Fetch data for the new tab
+        if (tab === 'odds') {
+          fetchOdds();
+        }
+      });
+    });
+
+    // Format time slot for display
+    function formatTimeSlot(isoString) {
+      const date = new Date(isoString);
+      return new Intl.DateTimeFormat('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      }).format(date);
+    }
+
+    // Get quarter label
+    function getQuarterLabel(quarter) {
+      if (quarter === 0) return 'Not Started';
+      if (quarter === 5) return 'Final/OT';
+      return `Q${quarter}`;
+    }
+
+    // Format odds value with +/- prefix
+    function formatOddsValue(value) {
+      if (value === undefined || value === null) return '-';
+      const num = parseInt(value);
+      if (num > 0) return `+${num}`;
+      return num.toString();
+    }
+
+    // Render API key error for odds
+    function renderOddsApiKeyError() {
+      const container = document.getElementById('oddsContainer');
+      container.innerHTML = `
+        <div class="error">
+          <div class="error-icon">🔑</div>
+          <h2>Odds API Key Required</h2>
+          <p>To show live betting odds, you need a free API key from the-odds-api.com</p>
+          <p><a href="https://the-odds-api.com/" target="_blank">Get your free API key here</a></p>
+          <p style="margin-top: 20px;">Then add to your .env file:</p>
+          <code>ODDS_API_KEY=your_api_key</code>
+          <button class="refresh-btn" onclick="fetchOdds()">Try Again</button>
+        </div>
+      `;
+    }
+
+    // Render quota exceeded error
+    function renderOddsQuotaError() {
+      const container = document.getElementById('oddsContainer');
+      container.innerHTML = `
+        <div class="error">
+          <div class="error-icon">⚠️</div>
+          <h2>API Quota Exceeded</h2>
+          <p>Your monthly usage quota for the-odds-api.com has been reached.</p>
+          <p>The free tier allows 500 requests per month.</p>
+          <p style="margin-top: 15px;">Options:</p>
+          <ul style="text-align: left; max-width: 400px; margin: 10px auto; color: rgba(255,255,255,0.7);">
+            <li>Wait until your quota resets next month</li>
+            <li>Upgrade to a paid plan at <a href="https://the-odds-api.com/" target="_blank" style="color: #60a5fa;">the-odds-api.com</a></li>
+            <li>Use a different API key</li>
+          </ul>
+        </div>
+      `;
+    }
+
+    // Group odds by time slot
+    function groupOddsByTimeSlot(odds) {
+      const groups = new Map();
+
+      odds.forEach(game => {
+        const gameTime = new Date(game.commence_time);
+        // Round to nearest hour for grouping
+        gameTime.setMinutes(0, 0, 0);
+        const slotKey = gameTime.toISOString();
+
+        if (!groups.has(slotKey)) {
+          groups.set(slotKey, {
+            time: gameTime,
+            games: []
+          });
+        }
+        groups.get(slotKey).games.push(game);
+      });
+
+      // Sort by time
+      return Array.from(groups.entries())
+        .sort((a, b) => a[1].time - b[1].time)
+        .map(([key, value]) => ({ slotKey: key, ...value }));
+    }
+
+    // Get slot status from gameSlots data
+    function getSlotStatus(slotKey, gameSlots) {
+      if (!gameSlots) return { status: 'scheduled', quarter: 0 };
+
+      const matchingSlot = gameSlots.find(s => {
+        const slotDate = new Date(s.timeSlot);
+        const checkDate = new Date(slotKey);
+        return slotDate.getTime() === checkDate.getTime();
+      });
+
+      if (!matchingSlot) return { status: 'scheduled', quarter: 0 };
+
+      if (matchingSlot.lowestQuarter === 0) {
+        return { status: 'scheduled', quarter: 0 };
+      } else if (matchingSlot.lowestQuarter >= 5) {
+        return { status: 'final', quarter: matchingSlot.lowestQuarter };
+      } else {
+        return { status: 'live', quarter: matchingSlot.lowestQuarter };
+      }
+    }
+
+    // Render a single odds card (compact version)
+    function renderOddsCard(game, gameSlots) {
+      const homeTeam = game.home_team;
+      const awayTeam = game.away_team;
+
+      // Find the best bookmaker
+      const preferredBooks = ['draftkings', 'fanduel', 'betmgm', 'pointsbetus'];
+      let bookmaker = game.bookmakers?.find(b => preferredBooks.includes(b.key));
+      if (!bookmaker && game.bookmakers?.length > 0) {
+        bookmaker = game.bookmakers[0];
+      }
+
+      if (!bookmaker) {
+        return `
+          <div class="odds-card">
+            <div class="odds-card-header">
+              <div class="odds-matchup">
+                <span class="odds-team">${awayTeam}</span>
+                <span class="odds-vs">@</span>
+                <span class="odds-team">${homeTeam}</span>
+              </div>
+            </div>
+            <p style="color: #888; text-align: center; font-size: 0.85rem;">No odds available</p>
+          </div>
+        `;
+      }
+
+      // Get totals
+      const totalMarket = bookmaker.markets?.find(m => m.key === 'totals');
+      const overTotal = totalMarket?.outcomes?.find(o => o.name === 'Over');
+      const underTotal = totalMarket?.outcomes?.find(o => o.name === 'Under');
+
+      // Find history for this game
+      const slotKey = new Date(game.commence_time);
+      slotKey.setMinutes(0, 0, 0);
+      const matchingSlot = gameSlots?.find(s => {
+        const slotDate = new Date(s.timeSlot);
+        return slotDate.getTime() === slotKey.getTime();
+      });
+
+      // Build history HTML
+      let historyHtml = '';
+      if (matchingSlot?.oddsHistory && matchingSlot.oddsHistory.length > 0) {
+        const historyItems = matchingSlot.oddsHistory.map(h => {
+          const historyGame = h.odds?.find(o =>
+            o.home_team === homeTeam && o.away_team === awayTeam
+          );
+          if (!historyGame) return '';
+
+          const historyBook = historyGame.bookmakers?.find(b => preferredBooks.includes(b.key)) || historyGame.bookmakers?.[0];
+          const historyTotal = historyBook?.markets?.find(m => m.key === 'totals');
+          const historyOver = historyTotal?.outcomes?.find(o => o.name === 'Over');
+
+          return `
+            <div class="history-quarter">
+              <span class="history-quarter-label">${getQuarterLabel(h.quarter)}</span>
+              <div class="history-odds">
+                <span class="history-odds-item"><span>Total:</span> ${historyOver?.point || '-'}</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        if (historyItems) {
+          historyHtml = `
+            <div class="odds-history" style="margin-top: 12px; padding-top: 12px;">
+              <div class="odds-history-title">
+                <span>📈</span> History
+              </div>
+              ${historyItems}
+            </div>
+          `;
+        }
+      }
+
+      return `
+        <div class="odds-card">
+          <div class="odds-card-header">
+            <div class="odds-matchup">
+              <span class="odds-team">${awayTeam}</span>
+              <span class="odds-vs">@</span>
+              <span class="odds-team">${homeTeam}</span>
+            </div>
+            <span class="odds-source">${bookmaker.title}</span>
+          </div>
+          <div class="odds-totals">
+            <div class="odds-total-item">
+              <span class="odds-total-label">Over</span>
+              <span class="odds-total-line">${overTotal?.point || '-'}</span>
+              <span class="odds-total-price">${formatOddsValue(overTotal?.price)}</span>
+            </div>
+            <div class="odds-total-item">
+              <span class="odds-total-label">Under</span>
+              <span class="odds-total-line">${underTotal?.point || '-'}</span>
+              <span class="odds-total-price">${formatOddsValue(underTotal?.price)}</span>
+            </div>
+          </div>
+          ${historyHtml}
+        </div>
+      `;
+    }
+
+    // Toggle time slot expansion
+    function toggleTimeSlot(slotId) {
+      const section = document.getElementById(slotId);
+      if (section) {
+        section.classList.toggle('expanded');
+      }
+    }
+
+    // Render odds tab content grouped by time
+    function renderOdds(data) {
+      const container = document.getElementById('oddsContainer');
+      const odds = data.currentOdds || [];
+      const gameSlots = data.gameSlots || [];
+
+      // Check for specific errors
+      if (data.oddsError === 'quota_exceeded') {
+        renderOddsQuotaError();
+        return;
+      }
+
+      if (!odds || odds.length === 0) {
+        container.innerHTML = `
+          <div class="no-odds">
+            <div class="no-odds-icon">📊</div>
+            <h2>No Odds Available</h2>
+            <p>Check back when games are scheduled or in progress</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Group odds by time slot
+      const groupedOdds = groupOddsByTimeSlot(odds);
+
+      const slotsHtml = groupedOdds.map((slot, index) => {
+        const timeStr = new Intl.DateTimeFormat('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        }).format(slot.time);
+
+        const slotStatus = getSlotStatus(slot.slotKey, gameSlots);
+        const statusClass = slotStatus.status;
+        const statusText = slotStatus.status === 'live'
+          ? `Q${slotStatus.quarter}`
+          : slotStatus.status === 'final'
+          ? 'Final'
+          : 'Scheduled';
+
+        const gamesHtml = slot.games.map(game => renderOddsCard(game, gameSlots)).join('');
+        const slotId = `slot-${index}`;
+
+        return `
+          <div id="${slotId}" class="time-slot-section">
+            <div class="time-slot-header" onclick="toggleTimeSlot('${slotId}')">
+              <div class="time-slot-left">
+                <span class="time-slot-time">${timeStr}</span>
+                <span class="time-slot-count">${slot.games.length} game${slot.games.length > 1 ? 's' : ''}</span>
+              </div>
+              <div class="time-slot-right">
+                <span class="time-slot-quarter ${statusClass}">${statusText}</span>
+                <span class="time-slot-arrow">▼</span>
+              </div>
+            </div>
+            <div class="time-slot-content">
+              <div class="time-slot-games-list">
+                ${gamesHtml}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      container.innerHTML = slotsHtml;
+    }
+
+    // Fetch odds data
+    async function fetchOdds() {
+      try {
+        const response = await fetch('/api/odds');
+        const data = await response.json();
+
+        if (data.error === 'Odds API key not configured') {
+          renderOddsApiKeyError();
+          return;
+        }
+
+        if (!response.ok) throw new Error('Failed to fetch');
+
+        renderOdds(data);
+      } catch (error) {
+        console.error('Error fetching odds:', error);
+        const container = document.getElementById('oddsContainer');
+        container.innerHTML = `
+          <div class="error">
+            <div class="error-icon">⚠️</div>
+            <h2>Unable to load odds</h2>
+            <p>Please check your connection and try again</p>
+            <button class="refresh-btn" onclick="fetchOdds()">Try Again</button>
+          </div>
+        `;
+      }
+    }
+
+    // ============= PARLAY CALCULATOR =============
+
+    // Load saved parlay settings from localStorage
+    function loadParlaySettings() {
+      const saved = localStorage.getItem('parlaySettings');
+      if (saved) {
+        try {
+          const settings = JSON.parse(saved);
+          if (settings.bankroll) document.getElementById('bankroll').value = settings.bankroll;
+          if (settings.riskLevel) document.getElementById('riskLevel').value = settings.riskLevel;
+          if (settings.ouWindow) document.getElementById('ouWindow').value = settings.ouWindow;
+        } catch (e) {
+          console.error('Error loading parlay settings:', e);
+        }
+      }
+    }
+
+    // Save parlay settings to localStorage
+    function saveParlaySettings() {
+      const settings = {
+        bankroll: document.getElementById('bankroll').value,
+        riskLevel: document.getElementById('riskLevel').value,
+        ouWindow: document.getElementById('ouWindow').value
+      };
+      localStorage.setItem('parlaySettings', JSON.stringify(settings));
+    }
+
+    // Track last odds fetch time for auto-update
+    let lastOddsQuarter = null;
+    let parlayAutoUpdateEnabled = false;
+    let lastParlayUpdate = null;
+
+    // Update parlay status indicator
+    function updateParlayStatus() {
+      const statusEl = document.getElementById('parlayStatus');
+      const lastUpdateEl = statusEl.querySelector('.last-update');
+
+      statusEl.style.display = 'flex';
+      lastParlayUpdate = new Date();
+      lastUpdateEl.textContent = `Last updated: ${lastParlayUpdate.toLocaleTimeString()}`;
+    }
+
+    // Normal CDF approximation for probability estimation
+    function normalCDF(z) {
+      const a1 =  0.254829592;
+      const a2 = -0.284496736;
+      const a3 =  1.421413741;
+      const a4 = -1.453152027;
+      const a5 =  1.061405429;
+      const p  =  0.3275911;
+
+      const sign = z < 0 ? -1 : 1;
+      const absZ = Math.abs(z) / Math.sqrt(2);
+      const t = 1.0 / (1.0 + p * absZ);
+      const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-absZ * absZ);
+
+      return 0.5 * (1.0 + sign * y);
+    }
+
+    // Convert American odds to decimal
+    function americanToDecimal(odds) {
+      if (odds > 0) {
+        return (odds / 100) + 1;
+      }
+      return (100 / Math.abs(odds)) + 1;
+    }
+
+    // Convert American odds to implied probability
+    function americanToImpliedProbability(odds) {
+      if (odds < 0) {
+        return Math.abs(odds) / (Math.abs(odds) + 100);
+      }
+      return 100 / (odds + 100);
+    }
+
+    // Estimate probability of OVER hitting using normal distribution
+    // NBA totals have ~11 point standard deviation
+    function estimateOverProbability(projected, line, stdDev = 11) {
+      const zScore = (projected - line) / stdDev;
+      return normalCDF(zScore);
+    }
+
+    // Get Kelly fraction based on risk level
+    function getKellyFraction(riskLevel) {
+      const fractions = {
+        conservative: 0.125,  // 1/8 Kelly
+        moderate: 0.25,       // 1/4 Kelly
+        aggressive: 0.5       // 1/2 Kelly
+      };
+      return fractions[riskLevel] || 0.25;
+    }
+
+    // Get max bet percentage based on risk level
+    function getMaxBetPercent(riskLevel) {
+      const maxPercent = {
+        conservative: 0.02,  // 2%
+        moderate: 0.05,      // 5%
+        aggressive: 0.10     // 10%
+      };
+      return maxPercent[riskLevel] || 0.05;
+    }
+
+    // Get parlay variance adjustment (reduce bet for more legs)
+    function getParlayAdjustment(numLegs) {
+      return Math.max(0.5, 1 - 0.1 * Math.max(0, numLegs - 2));
+    }
+
+    // Main parlay calculation
+    async function calculateParlay(isAutoUpdate = false) {
+      const bankroll = parseFloat(document.getElementById('bankroll').value);
+      const riskLevel = document.getElementById('riskLevel').value;
+      const ouWindow = parseFloat(document.getElementById('ouWindow').value) || 3;
+
+      if (!bankroll || bankroll <= 0) {
+        if (!isAutoUpdate) {
+          alert('Please enter a valid bankroll amount');
+        }
+        return;
+      }
+
+      // Save settings to localStorage
+      saveParlaySettings();
+      parlayAutoUpdateEnabled = true;
+
+      // Show status indicator
+      updateParlayStatus();
+
+      const resultsContainer = document.getElementById('parlayResults');
+      resultsContainer.innerHTML = `
+        <div class="loading" style="padding: 40px;">
+          <div class="spinner"></div>
+          <p class="loading-text">Calculating parlay...</p>
+        </div>
+      `;
+
+      try {
+        // Fetch both scores and odds
+        const [scoresRes, oddsRes] = await Promise.all([
+          fetch('/api/scores'),
+          fetch('/api/odds')
+        ]);
+
+        const scoresData = await scoresRes.json();
+        const oddsData = await oddsRes.json();
+
+        if (oddsData.error) {
+          resultsContainer.innerHTML = `
+            <div class="no-qualifying">
+              <div class="no-qualifying-icon">🔑</div>
+              <h3>Odds API Key Required</h3>
+              <p>Add ODDS_API_KEY to your .env file to use this feature</p>
+            </div>
+          `;
+          return;
+        }
+
+        const games = scoresData.games || [];
+        const odds = oddsData.currentOdds || [];
+
+        // Match games with odds and calculate qualifying legs
+        const qualifyingLegs = [];
+
+        for (const game of games) {
+          const status = getGameStatus(game);
+          // Only consider live games with projected totals
+          if (status.class !== 'live') continue;
+
+          const homeAbbr = game.home_team.abbreviation;
+          const awayAbbr = game.visitor_team.abbreviation;
+
+          // Calculate projected total from pace
+          const minutesPlayed = getMinutesPlayed(game);
+          const currentTotal = (game.home_team_score || 0) + (game.visitor_team_score || 0);
+          const projectedTotal = Math.round((currentTotal / minutesPlayed) * 48);
+
+          // Find matching odds
+          const matchingOdds = odds.find(o => {
+            const homeMatch = o.home_team.includes(game.home_team.city) ||
+                              o.home_team.includes(homeAbbr);
+            const awayMatch = o.away_team.includes(game.visitor_team.city) ||
+                              o.away_team.includes(awayAbbr);
+            return homeMatch || awayMatch;
+          });
+
+          if (!matchingOdds) continue;
+
+          // Get totals from odds
+          const preferredBooks = ['draftkings', 'fanduel', 'betmgm'];
+          let bookmaker = matchingOdds.bookmakers?.find(b => preferredBooks.includes(b.key));
+          if (!bookmaker && matchingOdds.bookmakers?.length > 0) {
+            bookmaker = matchingOdds.bookmakers[0];
+          }
+          if (!bookmaker) continue;
+
+          const totalMarket = bookmaker.markets?.find(m => m.key === 'totals');
+          if (!totalMarket) continue;
+
+          const overOutcome = totalMarket.outcomes?.find(o => o.name === 'Over');
+          const underOutcome = totalMarket.outcomes?.find(o => o.name === 'Under');
+          if (!overOutcome || !underOutcome) continue;
+
+          const bettingLine = overOutcome.point;
+          const difference = projectedTotal - bettingLine;
+
+          // Check if qualifies based on O/U window
+          if (Math.abs(difference) < ouWindow) continue;
+
+          // Determine direction and calculate edge
+          const isOver = difference > 0;
+          const americanOdds = isOver ? overOutcome.price : underOutcome.price;
+
+          let estimatedProb = estimateOverProbability(projectedTotal, bettingLine);
+          if (!isOver) estimatedProb = 1 - estimatedProb;
+
+          const impliedProb = americanToImpliedProbability(americanOdds);
+          const edge = estimatedProb - impliedProb;
+
+          qualifyingLegs.push({
+            matchup: `${awayAbbr} @ ${homeAbbr}`,
+            projectedTotal,
+            bettingLine,
+            difference,
+            direction: isOver ? 'OVER' : 'UNDER',
+            americanOdds,
+            estimatedProbability: estimatedProb,
+            impliedProbability: impliedProb,
+            edge,
+            decimalOdds: americanToDecimal(americanOdds)
+          });
+        }
+
+        // Render results
+        renderParlayResults(qualifyingLegs, bankroll, riskLevel);
+
+      } catch (error) {
+        console.error('Error calculating parlay:', error);
+        resultsContainer.innerHTML = `
+          <div class="no-qualifying">
+            <div class="no-qualifying-icon">⚠️</div>
+            <h3>Error Calculating Parlay</h3>
+            <p>Please try again</p>
+          </div>
+        `;
+      }
+    }
+
+    // Render parlay results
+    function renderParlayResults(legs, bankroll, riskLevel) {
+      const resultsContainer = document.getElementById('parlayResults');
+
+      if (legs.length === 0) {
+        resultsContainer.innerHTML = `
+          <div class="no-qualifying">
+            <div class="no-qualifying-icon">🔍</div>
+            <h3>No Qualifying Games</h3>
+            <p>No live games meet the O/U window criteria. Try lowering the window or wait for more games to start.</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Calculate parlay odds and Kelly bet
+      const combinedProbability = legs.reduce((acc, leg) => acc * leg.estimatedProbability, 1);
+      const combinedDecimalOdds = legs.reduce((acc, leg) => acc * leg.decimalOdds, 1);
+      const netOdds = combinedDecimalOdds - 1;
+
+      // Kelly calculation
+      const fullKelly = (netOdds * combinedProbability - (1 - combinedProbability)) / netOdds;
+      const kellyFraction = getKellyFraction(riskLevel);
+      const parlayAdjustment = getParlayAdjustment(legs.length);
+      const adjustedKelly = Math.max(0, fullKelly * kellyFraction * parlayAdjustment);
+
+      // Apply max bet cap
+      const maxBetPercent = getMaxBetPercent(riskLevel);
+      const cappedKelly = Math.min(adjustedKelly, maxBetPercent);
+
+      const recommendedBet = Math.round(bankroll * cappedKelly * 100) / 100;
+      const potentialPayout = Math.round(recommendedBet * combinedDecimalOdds * 100) / 100;
+
+      // Expected value
+      const ev = (combinedProbability * netOdds) - (1 - combinedProbability);
+
+      // Convert to American odds
+      const combinedAmericanOdds = combinedDecimalOdds >= 2
+        ? Math.round((combinedDecimalOdds - 1) * 100)
+        : Math.round(-100 / (combinedDecimalOdds - 1));
+
+      // Generate warnings
+      const warnings = [];
+      if (ev <= 0) {
+        warnings.push({ text: 'Negative expected value - consider not betting', type: 'warning' });
+      }
+      if (fullKelly <= 0) {
+        warnings.push({ text: 'Kelly suggests no bet - insufficient edge', type: 'warning' });
+      }
+      if (combinedProbability < 0.1) {
+        warnings.push({ text: 'Very low win probability (<10%) - high variance', type: 'caution' });
+      }
+      if (legs.length >= 4) {
+        warnings.push({ text: `${legs.length}-leg parlay has very low hit rate`, type: 'caution' });
+      }
+      const negativeEdgeLegs = legs.filter(l => l.edge < 0);
+      if (negativeEdgeLegs.length > 0) {
+        warnings.push({ text: `${negativeEdgeLegs.length} leg(s) have negative edge`, type: 'warning' });
+      }
+
+      // Render qualifying games
+      const gamesHtml = legs.map(leg => `
+        <div class="qualifying-game">
+          <div class="qualifying-game-header">
+            <span class="qualifying-matchup">${leg.matchup}</span>
+            <span class="qualifying-direction ${leg.direction.toLowerCase()}">${leg.direction}</span>
+          </div>
+          <div class="qualifying-stats">
+            <div class="qualifying-stat">
+              <span class="qualifying-stat-label">Projected</span>
+              <span class="qualifying-stat-value">${leg.projectedTotal}</span>
+            </div>
+            <div class="qualifying-stat">
+              <span class="qualifying-stat-label">Line</span>
+              <span class="qualifying-stat-value">${leg.bettingLine}</span>
+            </div>
+            <div class="qualifying-stat">
+              <span class="qualifying-stat-label">Edge</span>
+              <span class="qualifying-stat-value ${leg.edge > 0 ? 'positive' : 'negative'}">${(leg.edge * 100).toFixed(1)}%</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Render warnings
+      const warningsHtml = warnings.length > 0 ? `
+        <div class="parlay-warnings">
+          ${warnings.map(w => `
+            <div class="parlay-warning ${w.type}">
+              <span>${w.type === 'warning' ? '⚠️' : '⚡'}</span>
+              <span>${w.text}</span>
+            </div>
+          `).join('')}
+        </div>
+      ` : '';
+
+      resultsContainer.innerHTML = `
+        <div class="qualifying-games">
+          <div class="qualifying-header">
+            <span class="qualifying-title">Qualifying Games</span>
+            <span class="qualifying-count">${legs.length} leg${legs.length > 1 ? 's' : ''}</span>
+          </div>
+          ${gamesHtml}
+        </div>
+
+        <div class="parlay-recommendation">
+          <div class="recommendation-header">
+            <div class="recommendation-title">Recommended Bet</div>
+            <div class="recommendation-bet">$${recommendedBet.toFixed(2)}</div>
+            <div class="recommendation-percent">${(cappedKelly * 100).toFixed(2)}% of bankroll</div>
+          </div>
+          <div class="recommendation-stats">
+            <div class="recommendation-stat">
+              <div class="recommendation-stat-label">Combined Odds</div>
+              <div class="recommendation-stat-value highlight">${combinedAmericanOdds > 0 ? '+' : ''}${combinedAmericanOdds}</div>
+            </div>
+            <div class="recommendation-stat">
+              <div class="recommendation-stat-label">Win Probability</div>
+              <div class="recommendation-stat-value">${(combinedProbability * 100).toFixed(1)}%</div>
+            </div>
+            <div class="recommendation-stat">
+              <div class="recommendation-stat-label">Expected Value</div>
+              <div class="recommendation-stat-value ${ev > 0 ? 'positive' : 'negative'}">${ev > 0 ? '+' : ''}${(ev * 100).toFixed(1)}%</div>
+            </div>
+            <div class="recommendation-stat">
+              <div class="recommendation-stat-label">Potential Payout</div>
+              <div class="recommendation-stat-value highlight">$${potentialPayout.toFixed(2)}</div>
+            </div>
+          </div>
+          ${warningsHtml}
+        </div>
+      `;
+    }
+
+    // Check if odds have been updated (new quarter) and auto-recalculate parlay
+    async function checkForOddsUpdate() {
+      try {
+        const response = await fetch('/api/odds');
+        const data = await response.json();
+
+        if (data.error) return;
+
+        // Get the current lowest quarter from all game slots
+        let currentQuarter = 0;
+        if (data.gameSlots) {
+          for (const slot of data.gameSlots) {
+            if (slot.allStarted && slot.lowestQuarter > currentQuarter) {
+              currentQuarter = slot.lowestQuarter;
+            }
+          }
+        }
+
+        // Check if quarter has changed - trigger recalculation
+        if (lastOddsQuarter !== null && currentQuarter > lastOddsQuarter) {
+          console.log(`Quarter changed from ${lastOddsQuarter} to ${currentQuarter} - auto-updating parlay`);
+          if (parlayAutoUpdateEnabled) {
+            calculateParlay(true);
+          }
+        }
+
+        lastOddsQuarter = currentQuarter;
+      } catch (error) {
+        console.error('Error checking for odds update:', error);
+      }
+    }
+
+    // Add event listeners for settings inputs to save on change
+    function setupParlayEventListeners() {
+      const bankrollInput = document.getElementById('bankroll');
+      const riskLevelSelect = document.getElementById('riskLevel');
+      const ouWindowInput = document.getElementById('ouWindow');
+
+      bankrollInput.addEventListener('change', saveParlaySettings);
+      riskLevelSelect.addEventListener('change', saveParlaySettings);
+      ouWindowInput.addEventListener('change', saveParlaySettings);
+    }
+
     // Initialize
     document.getElementById('currentDate').textContent = formatDate(new Date());
     fetchGames();
+    loadParlaySettings();
+    setupParlayEventListeners();
 
-    // Auto-refresh every 30 seconds
-    setInterval(fetchGames, 30000);
+    // Auto-refresh scores every 3 seconds
+    setInterval(() => {
+      fetchGames();
+    }, 3000);
+
+    // Auto-refresh odds every 60 seconds (to conserve API quota)
+    setInterval(() => {
+      if (currentTab === 'odds') {
+        fetchOdds();
+      }
+      // Check for odds updates and auto-recalculate parlay if on parlay tab
+      if (currentTab === 'parlay' && parlayAutoUpdateEnabled) {
+        checkForOddsUpdate();
+      }
+    }, 60000);
   </script>
 </body>
 </html>
